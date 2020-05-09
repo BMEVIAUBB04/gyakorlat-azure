@@ -1,5 +1,19 @@
 # Azure alapú webhoszting
 
+## Célkitűzés
+Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure menedzsment eszközök megismerése, pl. Azure portál, Azure Cloud Shell. Azure erőforrások létrehozása és konfigurálása.
+
+
+## Előfeltételek
+
+A labor elvégzéséhez szükséges eszközök:
+
+- Visual Studio 2019 .NET Core 3.1 SDK-val telepítve
+
+Amit érdemes átnézned:
+
+- Azure előadások anyaga
+
 ## Közös rész
 A videó alapján.
 
@@ -38,3 +52,8 @@ Amelyik almodul címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem 
 ### Beadás
 A MS Learn profiloldalról kell beküldeni egy képernyőmentést, amin látszik az edu.bme.hu-s profil és az elvégzést igazoló jelölés.
 
+---
+
+Az itt található oktatási segédanyagok a BMEVIAUBB04 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
+
+Az anyagok a tárgy keretében oktatott kontextusban értelmezhetőek. Az anyagokért egyéb felhasználás esetén a szerző(k) felelősséget nem vállalnak.
