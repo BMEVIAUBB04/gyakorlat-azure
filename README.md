@@ -12,7 +12,7 @@ public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
 ```
 
 ### Csökkentett jogú felhasználó létrehozása
-```sql
+```tsql
 CREATE LOGIN acmeuser WITH password='ACMEdb123.';
 CREATE USER acmedbuser FROM LOGIN acmeuser;
 EXEC sp_addrolemember 'db_datareader', 'acmedbuser';
