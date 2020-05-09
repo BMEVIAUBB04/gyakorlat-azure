@@ -1,7 +1,6 @@
 # Azure alapú webhoszting
 
 ## Közös rész
-
 A videó alapján.
 
 [Sandbox](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
@@ -31,6 +30,11 @@ order by username;
 ```
 
 ## Önálló rész
-
 Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belépve.
-https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/
+[Magyar](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/) [Angol](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/)
+
+Amelyik almodul címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg.
+
+### Beadás
+A MS Learn profiloldalról kell beküldeni egy képernyőmentést, amin látszik az edu.bme.hu-s profil és az elvégzést igazoló jelölés.
+
