@@ -1,0 +1,16 @@
+﻿@page
+@{
+    ViewData["Title"] = "Szures";
+}
+
+<h1>Szures</h1>
+
+<form asp-controller="Termek" asp-action="GetTermekek" method="get">
+
+    <input class="form-control" name="termekId" type="number" />
+    <input class="form-control" name="minimumNettoAr" type="number" />
+    <input class="form-control" name="maximumNettoAr" type="number" />
+
+    <button class="btn btn-success">Filter!</button>
+
+</form>
