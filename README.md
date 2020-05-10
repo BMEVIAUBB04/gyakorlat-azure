@@ -17,7 +17,7 @@ Amit érdemes átnézned:
 ## Közös rész
 A videó alapján.
 
-[Sandbox](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
+[Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
 ### Alap Main függvény
 
