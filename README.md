@@ -14,8 +14,12 @@ Amit érdemes átnézned:
 
 - Azure előadások anyaga
 
+## Gyakorlat menete
+
+A közös rész és az önálló rész gyakorlatilag független, bármilyen sorrendben elvégezhető.
+
 ## Közös rész
-A videó alapján.
+A videó alapján (9. labor - Azure webhoszting gyakorlat).
 
 [Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
@@ -48,9 +52,6 @@ Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belép
 [Magyar](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/) [Angol](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/)
 
 Amelyik almodul címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg.
-
-### Beadás
-A MS Learn profiloldalról kell beküldeni egy képernyőmentést, amin látszik az edu.bme.hu-s profil és az elvégzést igazoló jelölés.
 
 ---
 
