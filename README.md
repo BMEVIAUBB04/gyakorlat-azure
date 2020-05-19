@@ -8,8 +8,9 @@ Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure men
 
 A labor elvégzéséhez szükséges eszközök:
 
-- Visual Studio 2019 .NET Core 3.1 SDK-val telepítve
-  - Azure Development workload
+- Visual Studio 2019 
+  - .NET Core 3.1 SDK-val és
+  - Azure Development workloaddal telepítve
 
 Amit érdemes átnézned:
 
