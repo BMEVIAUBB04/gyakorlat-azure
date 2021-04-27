@@ -29,7 +29,7 @@ Azure SQL létrehozás:
 	
 App Service létrehozás:
 
-- Runtime stack .NET 5-öt legyen
+- Runtime stack _.NET 5_ legyen
 - Megjelent egy új fül (Deployment) - ne változtassunk ott semmin
 - A _Monitoring_ fülön a .NET 5 miatt a monitorozást (_Application Insights_) nem lehet bekapcsolni - ez jogos, még nem támogatott, kézzel kellene beállítani, de ezzel nem foglalkozunk
 
