@@ -18,6 +18,8 @@ namespace AcmeShop.Web.Pages.Termekek
         {
             _context = context;
         }
+        public List<SelectListItem> AfaKulcsok { get; private set; }
+        public List<SelectListItem> Kategoriak { get; private set; }
 
         [BindProperty]
         public Termek Termek { get; set; }
@@ -37,13 +39,13 @@ namespace AcmeShop.Web.Pages.Termekek
             {
                 return NotFound();
             }
-           ViewData["AfaId"] = new SelectList(_context.Afa, "Id", "Id");
-           ViewData["KategoriaId"] = new SelectList(_context.Kategoria, "Id", "Id");
+            AfaKulcsok = _context.Afa.Select(a => new SelectListItem(a.Kulcs.ToString(), a.Id.ToString())).ToList();
+            Kategoriak = _context.Kategoria.Select(k => new SelectListItem(k.Nev, k.Id.ToString())).ToList();
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://aka.ms/RazorPagesCRUD.
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using AcmeShop.Data;
-using Microsoft.AspNetCore.Mvc;
+﻿using AcmeShop.Data;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using System.Linq;
 
 namespace AcmeShop.Web.Pages
 {

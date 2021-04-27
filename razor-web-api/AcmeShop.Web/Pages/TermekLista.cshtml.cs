@@ -1,14 +1,13 @@
-ï»¿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using AcmeShop.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
-namespace AcmeShop.Web.Pages.Shared
+namespace AcmeShop.Web.Pages
 {
     public class TermekListaModel : PageModel
     {
@@ -23,7 +22,7 @@ namespace AcmeShop.Web.Pages.Shared
 
         public Kategoria Kategoria { get; private set; }
 
-        public async Task<IActionResult> OnGetAsync([FromRoute]int kategoriaId)
+        public async Task<IActionResult> OnGetAsync([FromRoute] int kategoriaId)
         {
             var osszesKategoria = await _dbContext.Kategoria.ToDictionaryAsync(k => k.Id);
             if (!osszesKategoria.TryGetValue(kategoriaId, out var kategoria))
@@ -37,7 +36,7 @@ namespace AcmeShop.Web.Pages.Shared
             {
                 var kat = kategoriaSor.Dequeue();
                 if (!kategoriaIdk.Add(kat.Id))
-                    return StatusCode((int)HttpStatusCode.InternalServerError, "KÃ¶r volt a kategÃ³riafÃ¡ban!");
+                    return StatusCode((int)HttpStatusCode.InternalServerError, "Kör volt a kategóriafában!");
                 foreach (var gyerek in kat.GyerekKategoriak ?? Enumerable.Empty<Kategoria>())
                     kategoriaSor.Enqueue(gyerek);
             }

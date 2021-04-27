@@ -1,5 +1,5 @@
 ﻿@page "{kategoriaId:int}"
-@model AcmeShop.Web.Pages.Shared.TermekListaModel
+@model AcmeShop.Web.Pages.TermekListaModel
 @{ Layout = null; }
 
 <h1>@Model.Kategoria.Nev</h1>
@@ -22,11 +22,11 @@
                         <div class="lead">@termek.NettoAr.Value.ToString("N0") Ft</div>
                         if (termek.Afa.Kulcs.HasValue)
                         {
-                            <div class="lead text-muted small">@((termek.NettoAr.Value * ((100 + termek.Afa.Kulcs.Value) / 100.0)).ToString("N0")) Ft</div>
+                            <div class="lead text-muted">@((termek.NettoAr.Value * (1 + termek.Afa.Kulcs.Value / 100)).ToString("N0")) Ft</div>
                         }
                     }
-                    <div class="text-capitalize text-@(termek.Raktarkeszlet == 0 ? "danger" : termek.Raktarkeszlet < 20 ? "warning" : "success")">
-                        @(termek.Raktarkeszlet == 0 ? "Nincs raktáron" : termek.Raktarkeszlet < 20 ? "Utolsó darabok" : "Raktáron")
+                    <div class='text-capitalize text-@(termek.Raktarkeszlet == 0 ? "danger" : termek.Raktarkeszlet < 5 ? "warning" : "success")'>
+                        @(termek.Raktarkeszlet == 0 ? "Nincs raktáron" : termek.Raktarkeszlet < 5 ? "Utolsó darabok" : "Raktáron")
                     </div>
                 </div>
             </div>
