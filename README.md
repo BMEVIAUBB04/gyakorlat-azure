@@ -10,7 +10,7 @@ A labor elvégzéséhez szükséges eszközök:
 
 - Visual Studio 2019 
   - .NET 5 SDK-val és
-  - Azure Development workloaddal telepítve
+  - _Azure Development_ és _Data storage and processing_ workloadokkal telepítve
 
 Amit érdemes átnézned:
 
@@ -21,7 +21,30 @@ Amit érdemes átnézned:
 A közös rész és az önálló rész gyakorlatilag független, bármilyen sorrendben elvégezhető.
 
 ## Közös rész
-A videó alapján (9. labor - Azure webhoszting gyakorlat).
+A videó alapján (9. labor - Azure webhoszting gyakorlat). A videó tavalyi, azóta történt pár változás.
+
+Azure SQL létrehozás:
+
+- A biztonsági szolgáltatást kiemelték egy új _Security_ nevű fülre (_Azure Defender for SQL_) az _Additional Settings_ fülről - nem kell bekapcsolni
+	
+App Service létrehozás:
+
+- Runtime stack .NET 5-öt legyen
+- Megjelent egy új fül (Deployment) - ne változtassunk ott semmin
+- A _Monitoring_ fülön a .NET 5 miatt a monitorozást (_Application Insights_) nem lehet bekapcsolni - ez jogos, még nem támogatott, kézzel kellene beállítani, de ezzel nem foglalkozunk
+
+Azure SQL tűzfalszabályok:
+
+- Tipp: a saját IP-t sokkal könnyebb hozzáadni a felület tetején az _Add Client IP_ gombbal. Menteni ne felejtsetek el utána.
+
+Publikálás Visual Studio-ból:
+
+- A felület kinézetre [átalakult](https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019#publish-to-azure-app-service-on-windows), de ugyanazokat az adatokat kell megadni. Az utolsó lépésben kell megadni, hogy _publish profile_ (_pubxml_) fájlt hozzon létre.
+
+App Service extra szolgáltatások:
+
+- Az _Application Insights_ menüpont a fentebb említettek miatt ki lesz szürkítve
+
 
 [Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
@@ -33,7 +56,9 @@ public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
 
 ### Csökkentett jogú felhasználó létrehozása
 ```tsql
+-- Master-en kell futtatni
 CREATE LOGIN acmeuser WITH password='ACMEdb123.';
+-- NEM! a master-en kell futtatni
 CREATE USER acmedbuser FROM LOGIN acmeuser;
 EXEC sp_addrolemember 'db_datareader', 'acmedbuser';
 EXEC sp_addrolemember 'db_datawriter', 'acmedbuser';
