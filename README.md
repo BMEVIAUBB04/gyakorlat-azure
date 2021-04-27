@@ -21,7 +21,11 @@ Amit érdemes átnézned:
 A közös rész és az önálló rész gyakorlatilag független, bármilyen sorrendben elvégezhető.
 
 ## Közös rész
-A videó alapján (9. labor - Azure webhoszting gyakorlat). A videó tavalyi, azóta történt pár változás.
+A videó alapján (9. labor - Azure webhoszting gyakorlat). 
+
+[Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
+
+A videó tavalyi, azóta történt pár változás.
 
 Azure SQL létrehozás:
 
@@ -44,9 +48,6 @@ Publikálás Visual Studio-ból:
 App Service extra szolgáltatások:
 
 - Az _Application Insights_ menüpont a fentebb említettek miatt ki lesz szürkítve
-
-
-[Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
 ### Alap Main függvény
 
