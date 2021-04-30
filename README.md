@@ -21,7 +21,7 @@ Amit érdemes átnézned:
 A közös rész és az önálló rész gyakorlatilag független, bármilyen sorrendben elvégezhető.
 
 ## Közös rész
-A videó alapján (9. labor - Azure webhoszting gyakorlat). 
+A videó alapján (Háttéralkalmazások - GY10 Azure webhoszting). 
 
 [Sandbox](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data)
 
