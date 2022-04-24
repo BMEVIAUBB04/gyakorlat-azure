@@ -8,8 +8,8 @@ Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure men
 
 A labor elvégzéséhez szükséges eszközök:
 
-- Visual Studio 2019 
-  - .NET 5 SDK-val és
+- Visual Studio 2022 
+  - .NET 6 SDK-val és
   - _Azure Development_ és _Data storage and processing_ workloadokkal telepítve
 
 Amit érdemes átnézned:
