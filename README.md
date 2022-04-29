@@ -23,7 +23,7 @@ A közös rész és az önálló rész gyakorlatilag független, bármilyen sorr
 
 ## Közös rész
 
-[Ezen tutorial alapján](https://docs.microsoft.com/en-us/azure/app-service/tutorial-dotnetcore-sqldb-app?tabs=azure-portal%2Cvisualstudio-deploy%2Cdeploy-instructions-azure-portal%2Cazure-portal-logs%2Cazure-portal-resources). Amikor lehet, Azure portálon dolgozzunk.
+[Ezen útmutató alapján](https://docs.microsoft.com/en-us/azure/app-service/tutorial-dotnetcore-sqldb-app?tabs=azure-portal%2Cvisualstudio-deploy%2Cdeploy-instructions-azure-portal%2Cazure-portal-logs%2Cazure-portal-resources). Lentebb a feladatok számozása az útmutatót követi. Amikor lehet, Azure portálon dolgozzunk.
 
 ### Előkészítés - Előfizetés
 
@@ -35,7 +35,7 @@ A Sandbox előfizetés korlátai miatt
 
 ### Feladat 1 - Mintaalkalmazás
 
-Használjuk az MVC-s labor megoldását.
+Használjuk az MVC-s labor megoldását!
 
 ### Feladat 2 - Azure App Service létrehozás
 
@@ -47,12 +47,13 @@ Használjuk az MVC-s labor megoldását.
 - az útmutató szerint, figyelembe véve a Sandbox előfizetés miatti korlátokat.
 - a szerver nevének egyedinek kell lennie, érdemes a neptunkódot valahogy beletenni, pl. _<neptun kód>srv_
 - az adatbázis (nem a szerver) nevének nem kell egyedinek lennie, legyen: _AcmeShop_
-- az adatbázis (nem a szerver) létrehozásakor a _Networking_ fülön már eleve hozzá lehet adni a gépünk IP-jét, így a 6-os feladatnál majd nem kell megtenni.
+- az adatbázis (nem a szerver) létrehozásakor a _Networking_ fülön már eleve hozzá lehet adni a gépünk IP-jét
 
 #### Extra lépések
 
-1. Létrehozás után csatlakozzunk SSMS-ből. A csatlakozáshoz az adatok (kivéve a jelszót) az adatbázis _Connection Strings_ lapján kiolvashatóak.
-2. Csökkentett jogú felhasználó létrehozása
+1. Ha nem adtuk hozzá a gépünk IP-jét a szerver tűzfalszabályaihoz, mint engedélyezett IP címet, akkor tegyük meg most. A 6-os feladat leírása ismerteti ennek mikéntjét.
+1. Csatlakozzunk a létrehozott adatbázisból SSMS-ből. A csatlakozáshoz az adatok (kivéve a jelszót) az adatbázis _Connection Strings_ lapján kiolvashatóak.
+1. Csökkentett jogú felhasználó létrehozása
 	```tsql
 	-- Master adatbázison kell futtatni
 	CREATE LOGIN acmeuser WITH password='ACMEdb123.';
@@ -75,7 +76,7 @@ Használjuk az MVC-s labor megoldását.
 
 ### Feladat 4 - Alkalmazás telepítése
 
-Később
+Később, most hagyjuk ki.
 
 ### Feladat 5 - App Service konfigurálása
 
@@ -84,23 +85,23 @@ Később
 
 ### Feladat 6 - Adatbázistartalom inicializálása
 
--  Ne az appsettings.json-ba tegyük a connection string-et, hanem a [secrets.json fájlba](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=linux#enable-secret-storage)
+- Az első lépéseket (Azure SQL tűzfal konfigurálása) már végrehajtottuk korábban
+- Ne az appsettings.json-ba tegyük a connection string-et, hanem a [secrets.json fájlba](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=linux#enable-secret-storage)
 - A connection string neve _AcmeShopContext_ legyen
 
-Publikálás Visual Studio-ból:
+Extra lépésként **most hajtsuk végre** a 4-es feladatot. Visual Studio-ból telepítsünk és az MVC-s gyakorlat megoldását, végállapotát.
 
-- A felület kinézetre [átalakult](https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019#publish-to-azure-app-service-on-windows), de ugyanazokat az adatokat kell megadni. Az utolsó lépésben kell megadni, hogy _publish profile_ (_pubxml_) fájlt hozzon létre.
+### Feladat 7 - Alkalmazás kipróbálása
 
-App Service extra szolgáltatások:
+- Próbáljuk ki a telepített alkalmazást például egy termék módosításával. Ellenőrizzük SSMS-ből is, hogy az Azure-os adatbázisban megtörtént-e a módosítás.
 
-- Az _Application Insights_ menüpont a fentebb említettek miatt ki lesz szürkítve
+### Feladat 8 - Naplózás bekapcsolása
 
-### Alap Main függvény
+- Opcionális, idő spórolás miatt csak akkor érdemes bekapcsolni, ha a telepített alkalmazásban hibát tapasztalunk.
 
-```csharp
-public static void Main(string[] args) => CreateHostBuilder(args).Build().Run();
-```
+### Erőforrások felszabadítása
 
+- Sandbox előfizetést használunk, így nem szükséges.
 
 
 ## Önálló rész
