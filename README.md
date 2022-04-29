@@ -51,8 +51,8 @@ Használjuk az MVC-s labor megoldását!
 
 #### Extra lépések
 
-1. Ha nem adtuk hozzá a gépünk IP-jét a szerver tűzfalszabályaihoz, mint engedélyezett IP címet, akkor tegyük meg most. A 6-os feladat leírása ismerteti ennek mikéntjét.
-1. Csatlakozzunk a létrehozott adatbázisból SSMS-ből. A csatlakozáshoz az adatok (kivéve a jelszót) az adatbázis _Connection Strings_ lapján kiolvashatóak.
+1. Ha létrehozáskor nem adtuk hozzá a gépünk IP-jét a szerver tűzfalszabályaihoz, mint engedélyezett IP címet, akkor tegyük meg most. A 6-os feladat leírása ismerteti ennek mikéntjét.
+1. Csatlakozzunk a létrehozott adatbázishoz SSMS-ből. A csatlakozáshoz az adatok (kivéve a jelszót) az adatbázis _Connection Strings_ lapján kiolvashatóak.
 1. Csökkentett jogú felhasználó létrehozása
 	```tsql
 	-- Master adatbázison kell futtatni
