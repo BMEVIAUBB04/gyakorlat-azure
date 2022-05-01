@@ -27,7 +27,7 @@ A közös rész és az önálló rész gyakorlatilag független, bármilyen sorr
 
 ### Előkészítés - Előfizetés
 
-Igazi Azure előfizetés helyett [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, az [Azure portálra](https://portal.azure.com) el lehet navigálni. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_ és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region).
+Igazi Azure előfizetés helyett [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_ és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region).
 
 A Sandbox előfizetés korlátai miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
@@ -80,14 +80,14 @@ Később, most hagyjuk ki.
 
 ### Feladat 5 - App Service konfigurálása
 
-- az útmutató szerint, de a felhasználónév-jelszó _acmeuser-ACMEdb123._ legyen.
+- az útmutató szerint, de a felhasználónév-jelszó a connections tringben _acmeuser-ACMEdb123._ legyen.
 - a keresőmezőbe értelemszerűen ne az ott megadott neveket, hanem a korábban megadott adatbázis és app neveket írjuk
 
 ### Feladat 6 - Adatbázistartalom inicializálása
 
 - Az első lépéseket (Azure SQL tűzfal konfigurálása) már végrehajtottuk korábban
-- Ne az appsettings.json-ba tegyük a connection string-et, hanem a [secrets.json fájlba](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=linux#enable-secret-storage)
-- A connection string neve _AcmeShopContext_ legyen
+- Ne az appsettings.json-ba tegyük a connection string-et, hanem a [secrets.json fájlba](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=linux#enable-secret-storage). A felhasználó a connection stringben az adminisztrátor felhasználó legyen (ahogy az útmutatóban is szerepel).
+- A connection string neve _AcmeShopContext_ legyen. 
 
 Extra lépésként **most hajtsuk végre** a 4-es feladatot. Visual Studio-ból telepítsünk és az MVC-s gyakorlat megoldását, végállapotát.
 
