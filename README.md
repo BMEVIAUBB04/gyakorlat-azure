@@ -35,7 +35,7 @@ A Sandbox előfizetés korlátai miatt
 
 ### Feladat 1 - Mintaalkalmazás
 
-Használjuk az MVC-s labor megoldását!
+Használjuk az MVC-s labor megoldását (gyakorlatvezető biztosítja)!
 
 ### Feladat 2 - Azure App Service létrehozás
 
