@@ -26,11 +26,39 @@ A közös rész és az önálló rész gyakorlatilag független, bármilyen sorr
 
 ### Előkészítés - Előfizetés
 
-Igazi Azure előfizetés helyett [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_ és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
+Használhatjuk az évente megújítható hallgatói előfizetést vagy egy rövid életű, korlátozott sandbox előfizetést is.
 
-A Sandbox előfizetés korlátai miatt 
+#### Sandbox előfizetés esetén
+
+Ezesetben [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_, és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
+
+A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/support/faq?pivots=sandbox) miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
 - bizonyos erőforrásokat csak a _Central US_ régióban lehet létrehozni. Minden erőforrást tegyünk ebbe a régióba!
+
+#### Hallgatói előfizetés esetén
+
+Aktiválható [egyetemi email címmel](https://azure.microsoft.com/en-us/free/students/) (@edu.bme.hu). A BME tenantban jön létre, így általában nem kell [tenantot váltani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories).
+
+Minden erőforrást tegyünk ugyanabba a régióba, például nyugat-európaiba (_West Europe_).
+
+[Hozzunk létre](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups) egy üres erőforráscsoportot a labor számára, például AcmeShop néven. Ezt használjuk mindenhol, ahol erőforráscsoportot kell megadnunk.
+
+### Előkészítés - Azure CLI
+
+Csatlakozzunk az Azure fiókunkhoz terminálból:
+
+```powershell
+az login
+```
+
+Ha több előfizetés van a fiókunk alatt, akkor érdemes explicit kijelölni az Azure CLI által használatos alapértelmezett előfizetést. A használni kívánt előfizetés azonosítóját kell megadnunk, amit az [Azure portálról](https://learn.microsoft.com/en-us/azure/azure-portal/get-subscription-tenant-id#find-your-azure-subscription) is másolhatunk.
+
+```powershell
+az account set -s subscriptionid
+```
+
+A belépés általában csak az adott terminálablakra vonatkozik, így ha valamiért bezárjuk a terminált, akkor újra kell csatlakoznunk.
 
 ### Előkészítés - Telepítendő alkalmazás
 
@@ -43,6 +71,9 @@ dotnet build
 ```
 
 Ellenőrizzük, hogy lefordul-e.
+
+
+
 
 ### Feladat 1 - Azure SQL adatbázis létrehozása
 
