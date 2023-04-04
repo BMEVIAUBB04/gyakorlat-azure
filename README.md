@@ -8,11 +8,14 @@ Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure men
 A labor elvégzéséhez szükséges eszközök:
 
 - parancssori eszközök
-  - .NET 6 SDK (Visual Studio 2022 általában telepíti)([telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-  - EF Core Tools v6 vagy későbbi ([telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools))
-  - Azure CLI ([telepítési útmutató](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli))
-- terminálnak ajánlott a [Windows Terminal](https://github.com/microsoft/terminal) használata (Windows 11-ben ez az alapértelmezett terminál)
+  - .NET 6 SDK (Visual Studio 2022 általában telepíti)- [telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+  - EF Core Tools v6 vagy későbbi - [telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools)
+  - Azure CLI - [telepítési útmutató](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- Windows-on terminálnak ajánlott a [Windows Terminal](https://github.com/microsoft/terminal) használata (Windows 11-ben ez az alapértelmezett terminál) vagy a Visual Studio Code beépített [terminálja](https://code.visualstudio.com/docs/terminal/basics)
+- PowerShell 7 parancsértelmező - [telepítési útmutató](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3)
 - böngésző
+
+A labor alapvetően cross-platform (pl. bizonyos linux disztribúciókon is elvégezhető), azonban a leírás néhány helyen Windows-specifikus (pl. elérési útvonalak megadása).
 
 Amit érdemes átnézned:
 
@@ -38,7 +41,7 @@ A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/su
 
 #### Hallgatói előfizetés esetén
 
-Aktiválható [egyetemi email címmel](https://azure.microsoft.com/en-us/free/students/) (@edu.bme.hu). A BME tenantban jön létre, így általában nem kell [tenantot váltani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories).
+[Aktiválható](https://azure.microsoft.com/en-us/free/students/) egyetemi email címmel (@edu.bme.hu). A BME tenantban jön létre, így általában nem kell [tenantot váltani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories).
 
 Minden erőforrást tegyünk ugyanabba a régióba, például nyugat-európaiba (_West Europe_).
 
@@ -71,9 +74,6 @@ dotnet build
 ```
 
 Ellenőrizzük, hogy lefordul-e.
-
-
-
 
 ### Feladat 1 - Azure SQL adatbázis létrehozása
 
