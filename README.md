@@ -3,15 +3,16 @@
 ## Célkitűzés
 Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure menedzsment eszközök megismerése, pl. Azure portál, Azure Cloud Shell. Azure erőforrások létrehozása és konfigurálása. ADO.NET alapú adatelérés (az önálló részben).
 
-
 ## Előfeltételek
 
 A labor elvégzéséhez szükséges eszközök:
 
-- Visual Studio 2022 
-  - .NET 6 SDK-val és
-  - _Azure Development_ és _Data storage and processing_ workloadokkal telepítve
-- SQL Server Management Studio (SSMS)
+- parancssori eszközök
+  - .NET 6 SDK (Visual Studio 2022 általában telepíti)([telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+  - EF Core Tools v6 vagy későbbi ([telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools))
+  - Azure CLI ([telepítési útmutató](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli))
+- terminálnak ajánlott a [Windows Terminal](https://github.com/microsoft/terminal) használata (Windows 11-ben ez az alapértelmezett terminál)
+- böngésző
 
 Amit érdemes átnézned:
 
@@ -23,86 +24,138 @@ A közös rész és az önálló rész gyakorlatilag független, bármilyen sorr
 
 ## Közös rész
 
-[Ezen útmutató alapján](https://docs.microsoft.com/en-us/azure/app-service/tutorial-dotnetcore-sqldb-app?tabs=azure-portal%2Cvisualstudio-deploy%2Cdeploy-instructions-azure-portal%2Cazure-portal-logs%2Cazure-portal-resources). Lentebb a feladatok számozása az útmutatót követi. Amikor lehet, Azure portálon dolgozzunk.
-
 ### Előkészítés - Előfizetés
 
-Igazi Azure előfizetés helyett [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_ és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region).
+Igazi Azure előfizetés helyett [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_ és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
 
 A Sandbox előfizetés korlátai miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
 - bizonyos erőforrásokat csak a _Central US_ régióban lehet létrehozni. Minden erőforrást tegyünk ebbe a régióba!
 
-### Feladat 1 - Mintaalkalmazás
+### Előkészítés - Telepítendő alkalmazás
 
 Használjuk az MVC-s labor megoldását (gyakorlatvezető biztosítja)!
 
+A solution könyvtárában állva adjuk ki a parancssorban.
+
+```powershell
+dotnet build
+```
+
+Ellenőrizzük, hogy lefordul-e.
+
+### Feladat 1 - Azure SQL adatbázis létrehozása
+
+Navigáljunk ide: Azure portál [SQL választó](https://portal.azure.com/#create/Microsoft.AzureSQL)
+
+**Adatbázis neve:** AcmeShop
+
+**Szerver neve:** _<neptun kód>dbsrv_ (egyedinek kell lennie Azure-ban!)
+
+**Authentikáció:** SQL
+
+**Admin felhasználó neve:** acmeadmin
+
+**Admin felhasználó jelszava:** ami megfelel a szabályoknak, pl. XXDBAdm1n456.
+
+**Elastic pool:** nem
+
+**Workload:** Development
+
+**Compute + storage:** ha a fentit Development-re állítottuk, akkor itt már eleve a jó értéknek (General Purpose - Serverless) kell lennie.
+
+**Backup storage redundancy:** locally-redundant
+
+#### Network lap
+
+Connectivity method: Public endpoint
+
+**Allow Azure services and resources to access this server:** igen
+
+**Add current client IP address:** igen
+
+A többi lapon nem kell átállítani semmit, pl. **ne** töltessük fel adattal előre az adatbázist (*Use existing data*)
+
+[Képes segédlet](https://learn.microsoft.com/en-us/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&tabs=azure-portal#create-a-single-database)
+
 ### Feladat 2 - Azure App Service létrehozás
 
-- az útmutató szerint, figyelembe véve a Sandbox előfizetés miatti korlátokat.
-- az app nevének egyedinek kell lennie, érdemes a neptunkódot valahogy beletenni, pl. _<neptun kód>shop_
+Navigáljunk ide: Azure portál [App Service űrlap](https://portal.azure.com/#create/Microsoft.WebSite)
 
-### Feladat 3 - Adatbázis létrehozás, felhasználó létrehozása
+**App neve:** _<neptun kód>acmeshop_ (egyedinek kell lennie Azure-ban!)
 
-- az útmutató szerint, figyelembe véve a Sandbox előfizetés miatti korlátokat.
-- a szerver nevének egyedinek kell lennie, érdemes a neptunkódot valahogy beletenni, pl. _<neptun kód>srv_
-- az adatbázis (nem a szerver) nevének nem kell egyedinek lennie, legyen: _AcmeShop_
-- az adatbázis (nem a szerver) létrehozásakor a _Networking_ fülön már eleve hozzá lehet adni a gépünk IP-jét
+**Publish:** Code
 
-#### Extra lépések
+**Runtime stack:** .NET 6
 
-1. Ha létrehozáskor nem adtuk hozzá a gépünk IP-jét a szerver tűzfalszabályaihoz, mint engedélyezett IP címet, akkor tegyük meg most. A 6-os feladat leírása ismerteti ennek mikéntjét.
-1. Csatlakozzunk a létrehozott adatbázishoz SSMS-ből. A csatlakozáshoz az adatok (kivéve a jelszót) az adatbázis _Connection Strings_ lapján kiolvashatóak.
-1. Csökkentett jogú felhasználó létrehozása
-	```tsql
-	-- Master adatbázison kell futtatni
-	CREATE LOGIN acmeuser WITH password='ACMEdb123.';
-	-- NEM! a master-en kell futtatni
-	CREATE USER acmedbuser FROM LOGIN acmeuser;
-	EXEC sp_addrolemember 'db_datareader', 'acmedbuser';
-	EXEC sp_addrolemember 'db_datawriter', 'acmedbuser';
-	
-	-- csak ellenorzeshez
-	select name as username,
-	       create_date,
-	       modify_date,
-	       type_desc as type,
-	       authentication_type_desc as authentication_type
-	from sys.database_principals
-	where type not in ('A', 'G', 'R', 'X')
-	      and sid is not null
-	order by username;
-	```
+**OS:** Linux
 
-### Feladat 4 - Alkalmazás telepítése
+**Linux plan neve:** acmeplan (_Create new_ linkre kattintva lehet megadni)
 
-Később, most hagyjuk ki.
+**Plan:** Free F1
+
+Egy előfizetésben csak korlátozott számú F1 plan lehet, de ez a Sandbox előfizetés esetén általában nem probléma.
+
+#### Monitoring lap
+
+**Enable Application Insights:** nem
+
+A többi lapon nem kell átállítani semmit.
+
+### Feladat 3 - Adatbázis kapcsolódás ellenőrzés
+
+Kapcsolódjunk az Azure portálba beépített [kezelő eszközzel](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-portal?view=azuresql#connect-to-the-query-editor). Lekérdezést még nem tudunk írni, mert üres az adatbázis.
+
+Ezzel ellenőrizzük, hogy
+
+- jól tudjuk-e kapcsolódási adatokat (felhasználónév, jelszó)
+- a gépünk IP-je engedélyezett-e az adatbázis **szerver** tűzfalán
+
+A jelszót kivéve mindent megtudhatunk [a portálról](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql#get-server-connection-information).
+
+A jelszót nem lehet lekérdezni, [de felül lehet írni](https://learn.microsoft.com/en-us/azure/azure-sql/database/logins-create-manage?view=azuresql#existing-logins-and-user-accounts-after-creating-a-new-database).
+
+Utólag is [hozzáadhatunk tűzfalszabályt](https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart?view=azuresql#create-a-server-level-ip-based-firewall-rule) az SQL Server erőforráshoz.
+
+### Feladat 4 - Adatbázistartalom inicializálása
+
+A webes projekt könyvtárában állva inicializáljuk az adatbázist az EF Core migrációs eszközzel. A macskaköröm között a valós connection string-et adjuk meg. Egy nem valós jelszót tartalmazó connection string az [Azure portálról beszerezhető](https://learn.microsoft.com/en-us/azure/azure-sql/database/connect-query-content-reference-guide?view=azuresql#get-adonet-connection-information-optional---sql-database-only). Figyeljünk rá, hogy a valós jelszó kerüljön végül a parancsba:
+
+```powershell
+dotnet ef database update --connection "connection string"
+```
 
 ### Feladat 5 - App Service konfigurálása
 
-- az útmutató szerint, de a felhasználónév-jelszó a connections tringben _acmeuser-ACMEdb123._ legyen.
-- a keresőmezőbe értelemszerűen ne az ott megadott neveket, hanem a korábban megadott adatbázis és app neveket írjuk
+Az appsettings.json-ból nézzük meg, hogy az app milyen nevű connection string-et vár (pl. AcmeShopContext). Ezzel a névvel [vegyünk fel egy SQLAzure típusú connection string-et az App Service konfigurációba](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=portal#configure-connection-strings).
 
-### Feladat 6 - Adatbázistartalom inicializálása
+A connection string értéke legyen ugyanaz, mint az adatbázistartalom inicializálásakor, de ne legyen benne/körülötte macskaköröm.
 
-- Az első lépéseket (Azure SQL tűzfal konfigurálása) már végrehajtottuk korábban
-- Ne az appsettings.json-ba tegyük a connection string-et, hanem a [secrets.json fájlba](https://docs.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=linux#enable-secret-storage). A felhasználó a connection stringben az adminisztrátor felhasználó legyen (ahogy az útmutatóban is szerepel).
-- A connection string neve _AcmeShopContext_ legyen. 
+Ne felejtsünk menteni a konfigurációs oldalon!
 
-Extra lépésként **most hajtsuk végre** a 4-es feladatot. Visual Studio-ból telepítsünk és az MVC-s gyakorlat megoldását, végállapotát.
+### Feladat 6 - Alkalmazás telepítése
 
-### Feladat 7 - Alkalmazás kipróbálása
+Készítsük el az alkalmazás telepítőcsomagját. A webes projekt mappájában:
 
-- Próbáljuk ki a telepített alkalmazást például egy termék módosításával. Ellenőrizzük SSMS-ből is, hogy az Azure-os adatbázisban megtörtént-e a módosítás.
+```powershell
+dotnet publish -r linux-x64 --no-self-contained -o ..\publish\publish.zip
+```
 
-### Feladat 8 - Naplózás bekapcsolása
+A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa, ami a telepítőcsomagot tartalmazza.
 
-- Opcionális, idő spórolás miatt csak akkor érdemes bekapcsolni, ha a telepített alkalmazásban hibát tapasztalunk.
+Jöhet a telepítőcsomag csomag feltöltése az App Service-be. A resource group (_resource-group_ paraméter) és az App Service nevét (_name_) cseréljük le a saját környezetünknek megfelelően. A _publish_ mappában állva:
+
+```powershell
+az webapp deploy --resource-group acmegroup --name acmeshop --src-path publish.zip --type zip
+```
+
+### Feladat 7 - Kipróbálás
+
+Próbáljunk ki egy adatbázis módosítással és/vagy beszúrással járó műveletet. A művelet eredményét ellenőrizzük a kapcsolódó listázó felületen.
 
 ### Erőforrások felszabadítása
 
-- Sandbox előfizetést használunk, így nem szükséges.
-
+Ha sandbox előfizetést használunk, akkor nem szükséges, egyébként [töröljük az erőforráscsoportot](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-portal#delete-resource-group).
 
 ## Önálló rész
 Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belépve.
