@@ -107,7 +107,7 @@ Navigáljunk ide: Azure portál [SQL szolgáltatásválasztó](https://portal.az
 
 #### Network lap
 
-Connectivity method: Public endpoint
+**Connectivity method:** Public endpoint
 
 **Allow Azure services and resources to access this server:** igen
 
