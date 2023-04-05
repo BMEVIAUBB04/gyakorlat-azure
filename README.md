@@ -8,7 +8,7 @@ Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure men
 A labor elvégzéséhez szükséges eszközök:
 
 - parancssori eszközök
-  - .NET 6 SDK (Visual Studio 2022 általában telepíti)- [telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+  - .NET 6 SDK (Visual Studio 2022 általában telepíti) - [telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
   - EF Core Tools v6 vagy későbbi - [telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools)
   - Azure CLI - [telepítési útmutató](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Windows-on terminálnak ajánlott a [Windows Terminal](https://github.com/microsoft/terminal) használata (Windows 11-ben ez az alapértelmezett terminál) vagy a Visual Studio Code beépített [terminálja](https://code.visualstudio.com/docs/terminal/basics)
@@ -47,6 +47,14 @@ Minden erőforrást tegyünk ugyanabba a régióba, például nyugat-európaiba 
 
 [Hozzunk létre](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal#create-resource-groups) egy üres erőforráscsoportot a labor számára, például AcmeShop néven. Ezt használjuk mindenhol, ahol erőforráscsoportot kell megadnunk.
 
+#### Kivonat
+
+| Előfizetés       | Sandbox                     | Hallgatói                    |
+|------------------|-----------------------------|------------------------------|
+| Tenant           | Microsoft Learn             | BME                          |
+| Erőforráscsoport | learn-* <br>(kötött)        | AcmeShop<br>(választható)    |
+| Régió            | ált. Central US<br>(kötött) | West Europe<br>(választható) |
+
 ### Előkészítés - Azure CLI
 
 Csatlakozzunk az Azure fiókunkhoz terminálból:
@@ -77,7 +85,7 @@ Ellenőrizzük, hogy lefordul-e.
 
 ### Feladat 1 - Azure SQL adatbázis létrehozása
 
-Navigáljunk ide: Azure portál [SQL választó](https://portal.azure.com/#create/Microsoft.AzureSQL)
+Navigáljunk ide: Azure portál [SQL szolgáltatásválasztó](https://portal.azure.com/#create/Microsoft.AzureSQL)
 
 **Adatbázis neve:** AcmeShop
 
@@ -187,6 +195,13 @@ Próbáljunk ki egy adatbázis módosítással és/vagy beszúrással járó mű
 ### Erőforrások felszabadítása
 
 Ha sandbox előfizetést használunk, akkor nem szükséges, egyébként [töröljük az erőforráscsoportot](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/delete-resource-group?tabs=azure-portal#delete-resource-group).
+
+### Epilógus
+
+Biztonsági szempontból nem teljesen modern a megoldásunk, de a gyakorlat keretében sokszor kénytelenek voltunk az egyszerűbb megoldást választani.
+- az ajánlások szerint az adatbázis elérést már **hálózati szinten** kizárólag az App Service-re (pontosabban az App Service és az adatbázisszerver közös virtuális hálózatára) korlátozzák. Ez körülményesebbé teszi az adatbázisséma létrehozását, módosítását. Egy ilyen megoldásra [példa](https://learn.microsoft.com/en-us/azure/app-service/tutorial-dotnetcore-sqldb-app).
+- érdemes az adatbázisban az SQL alapú azonosítás helyett az Azure AD alapút választani, ezzel teljesen kiváltható a connection string jelszó és ennek teljes kezelése.
+- érdemes az alkalmazásnak (App Service-nek) az adminisztrátor(ok)tól teljesen külön (Azure AD-s) adatbázisfelhasználót létrehozni és ennek a felhasználónak csak annyi adatbázisos jogot adni, amire az alkalmazásnak feltétlenül szüksége van. Az alkalmazás kizárólag ezen felhasználóval kapcsolódjon, míg az adminisztrátorok az adminisztrátori felhasználóval elvégzik a séma módosítását, amikor szükséges. Egy ilyen megoldásra [példa](https://learn.microsoft.com/en-us/azure/app-service/tutorial-connect-msi-sql-database?tabs=windowsclient%2Cefcore%2Cdotnet).
 
 ## Önálló rész
 Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belépve.
