@@ -69,8 +69,6 @@ Ha több előfizetés van a fiókunk alatt, akkor érdemes explicit kijelölni a
 az account set -s subscriptionid
 ```
 
-A belépés általában csak az adott terminálablakra vonatkozik, így ha valamiért bezárjuk a terminált, akkor újra kell csatlakoznunk.
-
 ### Előkészítés - Telepítendő alkalmazás
 
 Használjuk az MVC-s labor megoldását (gyakorlatvezető biztosítja)!
@@ -174,13 +172,17 @@ Ne felejtsünk menteni a konfigurációs oldalon!
 
 ### Feladat 6 - Alkalmazás telepítése
 
-Készítsük el az alkalmazás telepítőcsomagját. A webes projekt mappájában:
+Generáltassuk a projekt linuxra telepíthető verzióját. A webes projekt mappájában:
 
 ```powershell
-dotnet publish -r linux-x64 --no-self-contained -o ..\publish\publish.zip
+dotnet publish -r linux-x64 --no-self-contained -o ..\publish
 ```
 
-A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa, ami a telepítőcsomagot tartalmazza.
+A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa. Tömörítsük, de maga a mappa ne kerüljön a zip-be, csak a tartalma. A _publish_ mappában állva:
+
+```powershell
+Compress-Archive .\* publish.zip
+```
 
 Jöhet a telepítőcsomag csomag feltöltése az App Service-be. A resource group (_resource-group_ paraméter) és az App Service nevét (_name_) cseréljük le a saját környezetünknek megfelelően. A _publish_ mappában állva:
 
