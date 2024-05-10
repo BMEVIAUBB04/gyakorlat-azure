@@ -37,7 +37,7 @@ Ezesetben [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/m
 
 A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/support/faq?pivots=sandbox) miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
-- bizonyos erőforrásokat csak a _Central US_ régióban lehet létrehozni. Minden erőforrást tegyünk ebbe a régióba!
+- bizonyos erőforrásokat csak a _Central US_ régióban lehet létrehozni. Minden erőforrást lehetőleg tegyünk ebbe a régióba!
 
 #### Hallgatói előfizetés esetén
 
@@ -53,7 +53,7 @@ Minden erőforrást tegyünk ugyanabba a régióba, például nyugat-európaiba 
 |------------------|-----------------------------|------------------------------|
 | Tenant           | Microsoft Learn             | BME                          |
 | Erőforráscsoport | learn-* <br>(kötött)        | AcmeShop<br>(választható)    |
-| Régió            | ált. Central US<br>(kötött) | West Europe<br>(választható) |
+| Régió            | ált. Central US<br>(némileg kötött) | West Europe<br>(választható) |
 
 ### Előkészítés - Azure CLI
 
