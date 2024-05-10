@@ -232,7 +232,7 @@ Pár hasznos *vim* [billentyűparancs](https://quickref.me/vim.html):
 - kilpés mentés nélkül (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!): `:q!`
 - kilépés mentéssel (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!) `:x`
 - insert típusú szerkesztési módba belépés `i`
-- insert típusú szerkesztési módból kilépés <kbd>Esc</kbd>
+- insert típusú vagy bármilyen szerkesztési módból kilépés <kbd>Esc</kbd>
 - beillesztés <kbd>Ctrl</kbd> + <kbd>Ins</kbd>
 
 ---
