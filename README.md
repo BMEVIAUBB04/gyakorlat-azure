@@ -212,7 +212,7 @@ Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belép
 Amelyik lecke/unit címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg.
 
 Sajnos néhány helyen már elavult az anyag, ezért néhány dolgot máshogy kell csinálni:
-- a .NET6-ra frissített kiinduló projektet klónozzuk:
+- a .NET6-ra frissített [kiinduló projektet](https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql) klónozzuk:
   ```bash
   git clone https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql.git education
   ```
