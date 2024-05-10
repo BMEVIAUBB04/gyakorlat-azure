@@ -212,14 +212,28 @@ Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belép
 Amelyik lecke/unit címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg.
 
 Sajnos néhány helyen már elavult az anyag, ezért néhány dolgot máshogy kell csinálni:
-- a .NET6-ra frissített klónozzuk: `git clone https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql.git education`
+- a .NET6-ra frissített kiinduló projektet klónozzuk:
+  ```bash
+  git clone https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql.git education
+  ```
 - az adatbázis létrehozásakor válasszuk a `Development` *Workload environment*-et (ez az alaphelyzet)
 - a portálon több ADO.NET-es connection string is található, azt használjuk, amiben ki van hagyva a hely a jelszónak (`Password={your_password};`) 
-- a `code` parancs helyett `vim` vagy `nano` ajánlott, a [code parancs Cloud Shell-ben](https://learn.microsoft.com/en-us/azure/cloud-shell/using-cloud-shell-editor) gyakran nem működik. A `code` parancs kipróbálásához ráadásul át kell váltani a régi felületre, ami miatt az összes beállított shell változónk elveszik!
-- nem mindig van szabad erőforrás a Central US régióban, így hiba esetén (quota error) érdemes más régióval próbálkozni, pl. East Us (az `az webapp up` parancsban pl. `--location centralus` `--location eastus` )
-- a kimásolható parancsok kódjában néha rosszul szerepel a resource group név, `Forbidden` hibát kaphatunk, ilyenkor ellenőrizzük, hogy a `--resource-group learn-XXX` egyezik-e annak a resource groupnak a nevével, amiben az adatbázisunk is van
+- a `code` parancs helyett [`vim`](https://quickref.me/vim.html) vagy [`nano`](https://www.nano-editor.org/dist/latest/cheatsheet.html) ajánlott, a [code parancs Cloud Shell-ben](https://learn.microsoft.com/en-us/azure/cloud-shell/using-cloud-shell-editor) gyakran nem működik. A `code` parancs kipróbálásához ráadásul át kell váltani a régi felületre, ami miatt az összes beállított shell változónk elveszik! A *nano*, *vim* billentyűparancsai mások, mint a *code*-é, ezért *vim* / *nano* használatakor az anygban írt billentyűprancsokat ne vegyük figyelembe.
+- kódszínező támogatás a *vim*-hez a következő parancsokkal kapcsolható be
+```bash
+VIMVERSION=$(vim --version | awk 'NR==1 {v=$5; FS="-"} NR == 2 {t=$2} END {print v "." t}')
+wget -O - https://github.com/vim/vim/archive/refs/tags/v${VIMVERSION}.tar.gz | tar -C ~/.vim -xzf -  vim-${VIMVERSION}/runtime/ --strip-components=2
+```
+- nem mindig van szabad erőforrás a CentralUS régióban, így hiba esetén (quota error) érdemes más régióval próbálkozni, pl. East Us (az `az webapp up` parancsban pl. `--location centralus` `--location eastus` )
+- a kimásolható parancsok kódjában néha rosszul szerepel az erőforrsácsoport neve, emiatt `Forbidden` hibát kaphatunk, ilyenkor ellenőrizzük, hogy a `--resource-group learn-XXX` egyezik-e annak a resource groupnak a nevével, amiben az adatbázisunk is van
 - az `az webapp up` telepítési hibánaplói megtalálhatók az Azure portálon a web app erőforrás `Deployment Center` menüpontja alatt a `Logs` fülön
 
+Pár hasznos *vim* [billentyűparancs](https://quickref.me/vim.html):
+- kilpés mentés nélkül (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!): `:q!`
+- kilépés mentéssel (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!) `:x`
+- insert típusú szerkesztési módba belépés `i`
+- insert típusú szerkesztési módból kilépés <kbd>Esc</kbd>
+- beillesztés <kbd>Ctrl</kbd> + <kbd>Ins</kbd>
 
 ---
 
