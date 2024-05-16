@@ -164,7 +164,7 @@ dotnet ef database update --connection "connection string"
 
 ### Feladat 5 - App Service konfigurálása
 
-Az appsettings.json-ból nézzük meg, hogy az app milyen nevű connection string-et vár (pl. AcmeShopContext). Ezzel a névvel [vegyünk fel egy SQLAzure típusú connection string-et az App Service konfigurációba](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=portal#configure-connection-strings).
+Az appsettings.json-ból nézzük meg, hogy az app milyen nevű connection string-et vár (pl. AcmeShopContext). Ezzel a névvel [vegyünk fel egy SQLAzure típusú connection string-et az App Service konfigurációba](https://learn.microsoft.com/en-us/azure/app-service/configure-common?tabs=portal#configure-connection-strings) (Environment variables menüpont).
 
 A connection string értéke legyen ugyanaz, mint az adatbázistartalom inicializálásakor, de ne legyen benne/körülötte macskaköröm.
 
