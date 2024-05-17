@@ -37,7 +37,7 @@ Ezesetben [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/m
 
 A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/support/faq?pivots=sandbox) miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
-- bizonyos erőforrásokat csak a _Central US_ régióban lehet létrehozni. Minden erőforrást lehetőleg tegyünk ebbe a régióba!
+- bizonyos erőforrásokat csak a _Central US_ vagy _East US_ régióban lehet létrehozni. Minden erőforrást lehetőleg tegyünk ugyanabba a régióba!
 
 #### Hallgatói előfizetés esetén
 
