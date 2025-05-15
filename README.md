@@ -123,7 +123,7 @@ Navigáljunk ide: Azure portál [App Service űrlap](https://portal.azure.com/#c
 
 **Publish:** Code
 
-**Runtime stack:** .NET 6
+**Runtime stack:** .NET 8
 
 **OS:** Linux
 
