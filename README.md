@@ -8,8 +8,8 @@ Adatbázist használó webalkalmazás telepítése Azure környezetbe. Azure men
 A labor elvégzéséhez szükséges eszközök:
 
 - parancssori eszközök
-  - .NET 6 SDK (Visual Studio 2022 általában telepíti) - [telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
-  - EF Core Tools v6 vagy későbbi - [telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools)
+  - .NET 8 SDK (Visual Studio 2022 általában telepíti) - [telepítési útmutató](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+  - EF Core Tools v8 vagy későbbi - [telepítési útmutató](https://learn.microsoft.com/en-us/ef/core/cli/dotnet#installing-the-tools)
   - Azure CLI - [telepítési útmutató](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Windows-on terminálnak ajánlott a [Windows Terminal](https://github.com/microsoft/terminal) használata (Windows 11-ben ez az alapértelmezett terminál) vagy a Visual Studio Code beépített [terminálja](https://code.visualstudio.com/docs/terminal/basics)
 - PowerShell 7 parancsértelmező - [telepítési útmutató](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.3)
@@ -33,7 +33,7 @@ Használhatjuk az évente megújítható hallgatói előfizetést vagy egy rövi
 
 #### Sandbox előfizetés esetén
 
-Ezesetben [ezt a Sandbox előfizetést](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/3-exercise-create-tables-bulk-import-query-data) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_, és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
+Ezesetben [ezt a Sandbox előfizetést](https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_, és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
 
 A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/support/faq?pivots=sandbox) miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
