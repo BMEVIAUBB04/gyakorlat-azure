@@ -33,7 +33,7 @@ Használhatjuk az évente megújítható hallgatói előfizetést vagy egy rövi
 
 #### Sandbox előfizetés esetén
 
-Ezesetben [ezt a Sandbox előfizetést](https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_, és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
+Ez esetben [ezt a Sandbox előfizetést](https://learn.microsoft.com/en-us/training/modules/host-a-web-app-with-azure-app-service/3-exercise-create-a-web-app-in-the-azure-portal?pivots=csharp) használjuk. Amint a visszaszámlálás megjelent, nyissuk meg az [Azure portált](https://portal.azure.com) külön böngészőfülön. A portálon [állítsuk be a megfelelő tenant-ot](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#switch-and-manage-directories): _Microsoft Learn_, és érdemes a portál nyelvét is angolra [állítani](https://docs.microsoft.com/en-us/azure/azure-portal/set-preferences#language--region), a leírás az angol nyelvű felületet követi.
 
 A Sandbox előfizetés [korlátai](https://learn.microsoft.com/en-us/training/support/faq?pivots=sandbox) miatt 
 - minden erőforrást csak az előre létrehozott _learn-_ kezdetű erőforráscsoprtba hozhatunk létre. Saját erőforráscsoportot nem hozhatunk létre!
@@ -83,7 +83,7 @@ Ellenőrizzük, hogy lefordul-e.
 
 ### Feladat 1 - Azure SQL adatbázis létrehozása
 
-Navigáljunk ide: Azure portál [SQL szolgáltatásválasztó](https://portal.azure.com/#create/Microsoft.AzureSQL)
+Navigáljunk ide: Azure portál [SQL szolgáltatásválasztó](https://portal.azure.com/#create/Microsoft.AzureSQL), itt Azure SQL Database kell.
 
 **Adatbázis neve:** AcmeShop
 
@@ -161,6 +161,11 @@ A webes projekt könyvtárában állva inicializáljuk az adatbázist az EF Core
 ```powershell
 dotnet ef database update --connection "connection string"
 ```
+Ha esetleg nem találja a parancsot:
+
+```powershell
+dotnet tool install --global dotnet-ef --version 8.*
+```
 
 ### Feladat 5 - App Service konfigurálása
 
@@ -178,11 +183,13 @@ Generáltassuk a projekt linuxra telepíthető verzióját. A webes projekt mapp
 dotnet publish -r linux-x64 --no-self-contained -o ..\publish
 ```
 
-A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa. Tömörítsük, de maga a mappa ne kerüljön a zip-be, csak a tartalma. A _publish_ mappában állva:
+A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa. Tömörítsük le a mappa tartalmát úgy, hogy a mappa maga ne kerüljön bele a ZIP fájlba, csak a benne lévő fájlok (a _publish_ mappába menjünk be, mindent jelöljünk ki és tömörítsük).
+
+<!-- A webes projekt mappájával egy szinten jön létre egy _publish_ nevű mappa. Tömörítsük, de maga a mappa ne kerüljön a zip-be, csak a tartalma. A _publish_ mappában állva:
 
 ```powershell
 Compress-Archive .\* publish.zip
-```
+``` -->
 
 Jöhet a telepítőcsomag csomag feltöltése az App Service-be. A resource group (_resource-group_ paraméter) és az App Service nevét (_name_) cseréljük le a saját környezetünknek megfelelően. A _publish_ mappában állva:
 
@@ -207,35 +214,83 @@ Biztonsági szempontból nem teljesen modern a megoldásunk, de a gyakorlat kere
 
 ## Önálló rész
 Az alábbi online tananyagot kell elvégezni az edu.bme.hu-s fiókotokkal belépve.
-[Magyar](https://docs.microsoft.com/hu-hu/learn/modules/develop-app-that-queries-azure-sql/) [Angol](https://docs.microsoft.com/en-us/learn/modules/develop-app-that-queries-azure-sql/)
+[Magyar](https://learn.microsoft.com/hu-hu/training/modules/develop-azure-sql-database/), [Angol](https://learn.microsoft.com/en-us/training/modules/develop-azure-sql-database/)
 
-Amelyik lecke/unit címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg.
+Az első leckék részletes leírást adnak az Azure SQL adatbázissal kapcsolatos képességeiről és sajátosságairól. Amelyik lecke/unit címe **nem** azzal kezdődik, hogy Gyakorlat/Exercise, azt nem kell végrehajtani, csak el kell olvasni - hiába szólít fel erre a szöveg. A jegyzőkönyvbe a közös rész feladatain kívül az önálló részben készített erőforrásokról képernyőkép, a sikeres GitHub Action futásról illetve a végén egy adatbázisba beszúrt Employeet (saját név és neptun kód értékekkel).
 
-Sajnos néhány helyen már elavult az anyag, ezért néhány dolgot máshogy kell csinálni:
-- a .NET6-ra frissített [kiinduló projektet](https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql) klónozzuk:
-  ```bash
-  git clone https://github.com/BMEVIAUBB04/mslearn-develop-app-that-queries-azure-sql.git education
-  ```
-- az adatbázis létrehozásakor válasszuk a `Development` *Workload environment*-et (ez az alaphelyzet)
+A Sandbox előfizetés nem támogatja a Service Principal létrehozását, így a GitHub Action használata nem lehetséges vele. Használj inkább Azure for Students előfizetést. 
+
+Néhány segítség és javítás az anyaghoz:
+- `SQL Database Projects` parancs akkor fut csak, ha fent van az *SQL Database Projects* extension (Ctrl+Shift+X és telepítsd fel, ha nincs)
+- Ha a _Push_ nem elérhető, akkor _Publish_ gombra kell kattintani és utána látod a GitHub oldalán a változtatásokat (ekkor szinkronizálod a brancheket)
+- Ha az az `ad sp create-for-rbac` parancsra *Insufficient privileges to complete the operation.* választ ad, akkor Sandbox módban vagyunk és nem tudjuk kiadni a parancsot.
 - a portálon több ADO.NET-es connection string is található, azt használjuk, amiben ki van hagyva a hely a jelszónak (`Password={your_password};`) 
-- a `code` parancs helyett [`vim`](https://quickref.me/vim.html) vagy [`nano`](https://www.nano-editor.org/dist/latest/cheatsheet.html) ajánlott, a [code parancs Cloud Shell-ben](https://learn.microsoft.com/en-us/azure/cloud-shell/using-cloud-shell-editor) gyakran nem működik. A `code` parancs kipróbálásához ráadásul át kell váltani a régi felületre, ami miatt az összes beállított shell változónk elveszik! A *nano*, *vim* billentyűparancsai mások, mint a *code*-é, ezért *vim* / *nano* használatakor az anygban írt billentyűprancsokat ne vegyük figyelembe.
-- kódszínező támogatás a *vim*-hez a következő parancsokkal kapcsolható be
-```bash
-VIMVERSION=$(vim --version | awk 'NR==1 {v=$5; FS="-"} NR == 2 {t=$2} END {print v "." t}')
-wget -O - https://github.com/vim/vim/archive/refs/tags/v${VIMVERSION}.tar.gz | tar -C ~/.vim -xzf -  vim-${VIMVERSION}/runtime/ --strip-components=2
+- nem mindig van szabad erőforrás a CentralUS régióban, így hiba esetén (quota error) érdemes más régióval próbálkozni, pl. East Us
+- A GitHub Action számára elkészítendő json változó kinyeréséhez az `--sdk-auth` kulcsszó kiadása is kell, a teljes parancs:
+```vim
+az ad sp create-for-rbac --name "MyDBProj" --role contributor --scopes /subscriptions/<your-subscription-id> --sdk-auth
 ```
-- nem mindig van szabad erőforrás a CentralUS régióban, így hiba esetén (quota error) érdemes más régióval próbálkozni, pl. East Us (az `az webapp up` parancsban pl. `--location centralus` `--location eastus` )
-- a kimásolható parancsok kódjában néha rosszul szerepel az erőforrsácsoport neve, emiatt `Forbidden` hibát kaphatunk, ilyenkor ellenőrizzük, hogy a `--resource-group learn-XXX` egyezik-e annak a resource groupnak a nevével, amiben az adatbázisunk is van
-- az `az webapp up` telepítési hibánaplói megtalálhatók az Azure portálon a web app erőforrás `Deployment Center` menüpontja alatt a `Logs` fülön
+- Erre kapott json válasz formája (ezt kell bemásolni a secretbe):
+```
+{
+  "clientId": "...",
+  "clientSecret": "...",
+  "subscriptionId": "...",
+  "tenantId": "...",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+```
 
-Pár hasznos *vim* [billentyűparancs](https://quickref.me/vim.html):
-- kilpés mentés nélkül (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!): `:q!`
-- kilépés mentéssel (ha szerkesztési módban vagyunk, előbb ki kell lépni a módból <kbd>Esc</kbd> billentyűvel!) `:x`
-- insert típusú szerkesztési módba belépés `i`
-- insert típusú vagy bármilyen szerkesztési módból kilépés <kbd>Esc</kbd>
-- beillesztés <kbd>Ctrl</kbd> + <kbd>Ins</kbd>
+- A leckében szereplő `main.yml` hibára fut, használd a következőt:
+```yml
+ name: Build and Deploy SQL Database Project
+ on:
+   push:
+     branches:
+       - main
+ jobs:
+   build:
+     permissions:
+       contents: 'read'
+       id-token: 'write'
+          
+     runs-on: ubuntu-latest  # Can also use windows-latest depending on your environment
+     steps:
+       - name: Checkout repository
+         uses: actions/checkout@v3
 
----
+     # Install the SQLpackage tool
+       - name: sqlpack install
+         run: dotnet tool install -g microsoft.sqlpackage
+    
+       - name: Login to Azure
+         uses: azure/login@v1
+         with:
+           creds: ${{ secrets.AZURE_CREDENTIALS }}
+           auth-type: SERVICE_PRINCIPAL
+    
+       # Build and Deploy SQL Project
+       - name: Build and Deploy SQL Project
+         uses: azure/sql-action@v2.3
+         with:
+           connection-string: ${{ secrets.AZURE_CONN_STRING }}
+           path: './MyDBProj/MyDBProj.sqlproj'
+           action: 'publish'
+           build-arguments: '-c Release'
+           arguments: '/p:DropObjectsNotInSource=true'
+```
+- A végén ne felejtsd el kitörölni az előfizetés resource-ait, különben az előfizetésed fogja terhelni.
+
+
+Amennyiben megtetszett a tananyag, a [learning path](https://learn.microsoft.com/en-us/training/paths/develop-data-driven-app-sql-db/) többi modulját is csináld meg nyugodtan.
+
+
+
 
 Az itt található oktatási segédanyagok a BMEVIAUBB04 tárgy hallgatóinak készültek. Az anyagok oly módú felhasználása, amely a tárgy oktatásához nem szorosan kapcsolódik, csak a szerző(k) és a forrás megjelölésével történhet.
 
